@@ -12,6 +12,8 @@ const products = [
 // DOM elements
 const productList = document.getElementById("product-list");
 
+let cart = []
+
 // Render product list
 function renderProducts() {
   products.forEach((product) => {
@@ -22,17 +24,54 @@ function renderProducts() {
 }
 
 // Render cart list
-function renderCart() {}
+function renderCart() {
+	const cartList = document.getElementById("cart-list");
+	cartList.innerHTML = "";
+	cart.forEach((product)=>{
+		const li = document.createElement("li");
+		li.innerHTML = `${product.name} - ${product.price}`
+		cartList.appendChild(li);
+	})	
+}
 
 // Add item to cart
-function addToCart(productId) {}
+function addToCart(productId) {
+	const product = products.find((item)=> item.id === productId)
+	cart.push(product)
+	sessionStorage.setItem("cart",JSON.stringify(cart));
+
+	const clearCartBtn = document.getElementById("clear-cart-btn");
+	clearCartBtn.addEventListener("click",()=>{
+		clearCart()
+	})
+	renderCart()
+}
+
 
 // Remove item from cart
-function removeFromCart(productId) {}
+function removeFromCart(productId) {
+	
+}
 
 // Clear cart
-function clearCart() {}
+function clearCart() {
+	cart = []
+	sessionStorage.setItem("cart",JSON.stringify(cart))
+	renderCart()
+}
 
 // Initial render
 renderProducts();
+document.querySelectorAll(".add-to-cart-btn").forEach((button)=>{
+	button.addEventListener("click",()=>{
+		const productId = Number(button.dataset.id);
+		addToCart(productId)
+	})
+})
+const savedCart = sessionStorage.getItem("cart")
+if(savedCart){
+	cart.JSON.parse(savedCart)
+}
+
+
 renderCart();

@@ -70,7 +70,7 @@ document.querySelectorAll(".add-to-cart-btn").forEach((button)=>{
 })
 const savedCart = sessionStorage.getItem("cart")
 if(savedCart){
-	cart.JSON.parse(savedCart)
+	cart=JSON.parse(savedCart)
 }
 
 

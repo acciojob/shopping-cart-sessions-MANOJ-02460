@@ -40,10 +40,7 @@ function addToCart(productId) {
 	cart.push(product)
 	sessionStorage.setItem("cart",JSON.stringify(cart));
 
-	const clearCartBtn = document.getElementById("clear-cart-btn");
-	clearCartBtn.addEventListener("click",()=>{
-		clearCart()
-	})
+	
 	renderCart()
 }
 
@@ -73,5 +70,9 @@ if(savedCart){
 	cart=JSON.parse(savedCart)
 }
 
-
 renderCart();
+
+const clearCartBtn = document.getElementById("clear-cart-btn");
+	clearCartBtn.addEventListener("click",()=>{
+		clearCart()
+	})
